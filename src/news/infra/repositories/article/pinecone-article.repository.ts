@@ -15,6 +15,7 @@ export class PineconeArticleRepository implements ArticleRepository {
   private indexName: string;
 
   constructor(
+    @Inject(ConfigService)
     private configService: ConfigService,
     @Inject('LlmService')
     private llmService: LlmService,

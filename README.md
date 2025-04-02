@@ -4,8 +4,10 @@ A NestJS-based application that implements a Retrieval-Augmented Generation (RAG
 
 ## Live Demo
 
-This application is deployed and available online via Railway:
-[https://news-rag-app.up.railway.app](https://news-rag-app.up.railway.app)
+This application is deployed and available online via AWS Lambda:
+[https://znmo2eshrg.execute-api.us-east-1.amazonaws.com/production/](https://znmo2eshrg.execute-api.us-east-1.amazonaws.com/production/)
+
+> **Note**: Since the application is deployed as a Lambda function, the Kafka ingestion feature is not available through this endpoint. However, you can still add new articles by including their URLs directly in your query (e.g., "Summarize this article: https://example.com/article").
 
 ## Features
 

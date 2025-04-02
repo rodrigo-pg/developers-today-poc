@@ -9,16 +9,9 @@ async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const app = await NestFactory.create(AppModule);
   
-  // Enable CORS
   app.enableCors();
-  
-  // Security middleware
   app.use(helmet());
-  
-  // Compression for better performance
   app.use(compression());
-  
-  // Validation
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   
   // Start data ingestion

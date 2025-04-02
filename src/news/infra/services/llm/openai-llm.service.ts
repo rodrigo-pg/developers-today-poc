@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import OpenAI from 'openai';
 import { LlmService, QueryResponse } from '../../../domain/services/llm.interface';
@@ -12,7 +12,10 @@ export class OpenAiLlmService implements LlmService {
   private langfuse: any | null = null;
   private langfuseEnabled: boolean;
 
-  constructor(private configService: ConfigService) {
+  constructor(
+    @Inject(ConfigService)
+    private configService: ConfigService
+  ) {
     this.openai = new OpenAI({
       apiKey: this.configService.get<string>('OPENAI_API_KEY'),
     });

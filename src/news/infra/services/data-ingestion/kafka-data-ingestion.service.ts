@@ -15,6 +15,7 @@ export class KafkaDataIngestion implements DataIngestion, OnModuleDestroy {
   private isRunning = false;
 
   constructor(
+    @Inject(ConfigService)
     private configService: ConfigService,
     @Inject('ProcessArticlePort')
     private processArticleUseCase: ProcessArticlePort,
