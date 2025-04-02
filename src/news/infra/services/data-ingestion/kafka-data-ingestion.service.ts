@@ -52,7 +52,7 @@ export class KafkaDataIngestion implements DataIngestion, OnModuleDestroy {
       await this.consumer.run({
         eachMessage: async ({ message }) => {
           try {
-            const url = message.value.toString();
+            const url = JSON.parse(message.value.toString())["value"]["url"];
             this.logger.log(`Received URL from Kafka: ${url}`);
             await this.processArticleUseCase.execute(url);
           } catch (error) {
@@ -92,9 +92,14 @@ export class KafkaDataIngestion implements DataIngestion, OnModuleDestroy {
         .pipe(csv())
         .on('data', async (row) => {
           try {
-            if (row.url) {
+            if (row.URL) {
+              this.logger.log(`Processing URL from CSV: ${row.URL} (Source: ${row.Source || 'unknown'})`);
+              await this.processArticleUseCase.execute(row.URL);
+            } else if (row.url) {
               this.logger.log(`Processing URL from CSV: ${row.url}`);
               await this.processArticleUseCase.execute(row.url);
+            } else {
+              this.logger.warn(`CSV row missing URL field: ${JSON.stringify(row)}`);
             }
           } catch (error) {
             this.logger.error(`Error processing CSV row: ${error.message}`);

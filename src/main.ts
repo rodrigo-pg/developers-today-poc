@@ -8,16 +8,15 @@ import { StartIngestionPort } from './news/application/ports/start-ingestion.por
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const app = await NestFactory.create(AppModule);
-  
+
   app.enableCors();
   app.use(helmet());
   app.use(compression());
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   
-  // Start data ingestion
-  // const startIngestionUseCase = app.get<StartIngestionPort>('StartIngestionPort');
-  // startIngestionUseCase.execute()
-  //   .catch(error => logger.error(`Failed to start ingestion: ${error.message}`));
+  const startIngestionUseCase = app.get<StartIngestionPort>('StartIngestionPort');
+  startIngestionUseCase.execute()
+    .catch(error => logger.error(`Failed to start ingestion: ${error.message}`));
   
   const port = process.env.PORT || 3000;
   await app.listen(port);
