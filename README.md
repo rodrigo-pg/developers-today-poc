@@ -84,31 +84,22 @@ Create a `.env` file in the root directory with the following variables:
 
 ```
 # Application
-PORT=3000
-
-# OpenAI
-OPENAI_API_KEY=your-openai-api-key
-
-# Pinecone
-PINECONE_API_KEY=your-pinecone-api-key
-PINECONE_INDEX_NAME=your-pinecone-index-name
-
-# Kafka (optional)
-KAFKA_BROKER=your-kafka-broker
-KAFKA_USERNAME=your-kafka-username
-KAFKA_PASSWORD=your-kafka-password
-KAFKA_TOPIC_NAME=your-kafka-topic
-KAFKA_GROUP_ID_PREFIX=rag-news-
-
-# Langfuse (optional)
-LANGFUSE_ENABLED=false
-LANGFUSE_PUBLIC_KEY=your-langfuse-public-key
-LANGFUSE_SECRET_KEY=your-langfuse-secret-key
-LANGFUSE_HOST=https://cloud.langfuse.com
-
-# Fallback CSV Path (used if Kafka is unavailable)
-CSV_FALLBACK_PATH=./articles_dataset.csv
+KAFKA_BROKER=
+KAFKA_USERNAME=
+KAFKA_PASSWORD=
+KAFKA_TOPIC_NAME=
+KAFKA_GROUP_ID_PREFIX=
+PINECONE_API_KEY=
+PINECONE_INDEX_NAME=
+CSV_FALLBACK_PATH=
+OPENAI_API_KEY=
+LANGFUSE_PUBLIC_KEY=
+LANGFUSE_SECRET_KEY=
+LANGFUSE_HOST=
+LANGFUSE_ENABLED=
 ```
+
+> **Note**: Make sure to not use quotes around the values or Docker may misinterpret them.
 
 ## Installation
 
